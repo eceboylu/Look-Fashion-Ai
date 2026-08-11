@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>AI Wardrobe - Yönetim Paneli</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 min-h-screen text-slate-800">
+<header class="bg-white border-b sticky top-0 z-20">
+<div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+<div class="flex items-center gap-3"><div class="w-10 h-10 rounded-xl bg-violet-600 flex items-center justify-center text-xl">👗</div><div><b>AI Wardrobe</b><div class="text-xs text-slate-400">Yönetim Paneli</div></div></div>
+<a href="index.html" class="text-sm font-semibold text-violet-600 bg-violet-50 px-4 py-2 rounded-xl">← Ana Sayfa</a>
+</div></header>
+
+<main class="max-w-7xl mx-auto px-6 py-10">
+<div class="mb-8"><span class="text-xs font-bold text-violet-600">DASHBOARD</span><h1 class="text-4xl font-black mt-2">Müşteri Talepleri</h1><p class="text-slate-500 mt-2">AI Wardrobe iletişim kayıtlarını buradan yönet.</p></div>
+
+<div class="grid md:grid-cols-3 gap-5 mb-8">
+<div class="bg-white rounded-2xl border p-6"><p class="text-xs text-slate-400 font-bold">TOPLAM LEAD</p><div id="toplam" class="text-4xl font-black mt-2">0</div></div>
+<div class="bg-white rounded-2xl border p-6"><p class="text-xs text-slate-400 font-bold">BUGÜN</p><div class="text-4xl font-black mt-2 text-violet-600">—</div></div>
+<div class="bg-white rounded-2xl border p-6"><p class="text-xs text-slate-400 font-bold">DURUM</p><div class="text-lg font-bold mt-3 text-green-600">● Sistem Aktif</div></div>
+</div>
+
+<div class="bg-white rounded-3xl border shadow-sm overflow-hidden">
+<div class="p-6 border-b"><h2 class="font-bold text-lg">Son İletişimler</h2><p class="text-sm text-slate-400 mt-1">Kullanıcılardan gelen mesajlar</p></div>
+<div class="overflow-x-auto">
+<table class="w-full">
+<thead class="bg-slate-50 text-xs text-slate-400 uppercase"><tr><th class="text-left p-5">İsim</th><th class="text-left p-5">Telefon</th><th class="text-left p-5">Mesaj</th><th class="text-left p-5">Tarih</th></tr></thead>
+<tbody id="leadler" class="divide-y"></tbody>
+</table>
+</div></div>
+</main>
+
+<script>
+async function getir(){
+ try{
+  const r=await fetch('/api/leads'); const d=await r.json(); const leads=d.veri||[];
+  document.getElementById('toplam').innerText=leads.length;
+  const tbody=document.getElementById('leadler'); tbody.innerHTML='';
+  if(!leads.length){tbody.innerHTML='<tr><td colspan="4" class="p-10 text-center text-slate-400">Henüz lead bulunmuyor.</td></tr>';return;}
+  leads.forEach(x=>{const tr=document.createElement('tr');tr.className='hover:bg-violet-50/40';tr.innerHTML=`<td class="p-5 font-bold">${x.isim||'-'}</td><td class="p-5 text-slate-500">${x.telefon||'-'}</td><td class="p-5 max-w-md">${x.mesaj||'-'}</td><td class="p-5 text-slate-400 text-sm">${x.tarih||x.created_at||'-'}</td>`;tbody.appendChild(tr);});
+ }catch(e){console.error(e);}
+}
+window.onload=getir;
+</script>
+</body></html>
