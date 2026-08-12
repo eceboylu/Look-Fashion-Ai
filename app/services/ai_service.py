@@ -27,7 +27,7 @@ class AIService:
         }
 
         system_prompt = f"""
-Sen "AI Wardrobe" adlı dijital gardırop uygulamasının
+Sen "Fashion Look Ai" adlı dijital gardırop uygulamasının
 kişisel stil asistanısın.
 
 GÖREVİN:
