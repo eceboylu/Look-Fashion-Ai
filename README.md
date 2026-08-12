@@ -2,6 +2,10 @@
 
 Fashion Look Ai, kullanıcıların yapay zekâ ile etkileşimde bulunarak kişiselleştirilmiş stil ve kombin önerileri almasına olanak tanıyan bir stil asistanıdır.
 
+##  Proje Bağlantıları
+
+* Canlı Backend (Render): https://look-fashion-ai.onrender.com
+* Wix Canlı Arayüz: https://eceboylu.wixstudio.com/fashion-look-ai
 
 ## ✨ Proje Özellikleri
 
