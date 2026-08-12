@@ -46,7 +46,7 @@ def init_db(app):
         ''')
         db.commit()
 
-    # DB bağlantısını her istek sonunda kapat (artık burada, routes.py'de değil)
+    # her istek sonunda kapat 
     @app.teardown_appcontext
     def close_connection(exception):
         db = getattr(g, '_database', None)
@@ -113,6 +113,6 @@ def tum_leadleri_getir():
     lead_listesi = []
     for row in rows:
         d = dict(row)
-        d['_id'] = str(d['id'])  # Wix Repeater için zorunlu
+        d['_id'] = str(d['id'])  
         lead_listesi.append(d)
     return lead_listesi
