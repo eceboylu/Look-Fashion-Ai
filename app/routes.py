@@ -175,44 +175,35 @@ def durum_guncelle_route(kiyafet_id):
 # AI SOHBET
 # =========================
 
-@api_bp.route("/sohbet", methods=["POST"])
+@api_bp.route('/sohbet', methods=['POST'])
 def ai_sohbet_route():
 
     data = request.get_json()
 
-    mesaj = data.get("mesaj", "").strip() if data else ""
+    mesaj = data.get('mesaj', '') if data else ''
+    gecmis = data.get('gecmis', []) if data else []
 
     if not mesaj:
-
         return jsonify({
             "basari": False,
             "mesaj": "Mesaj boş olamaz!"
         }), 400
 
-    # Wix tarafından gönderilen konuşma geçmişi
-    gecmis = data.get("gecmis", [])
-
-    # Güvenlik: geçmiş liste değilse boş kabul et
-    if not isinstance(gecmis, list):
-        gecmis = []
-
     try:
 
         # Sadece aktif kıyafetleri AI'a gönder
-        aktif_dolap = tum_kiyafetleri_getir(
-            sadece_aktif=True
-        )
+        aktif_dolap = tum_kiyafetleri_getir(sadece_aktif=True)
 
         dolap_ozeti = ", ".join([
-            f"{k['tur']} ({k['renk']}, {k['stil']}, {k['mevsim']})"
+            f"{k['tur']} ({k['renk']}, {k['stil']})"
             for k in aktif_dolap
         ])
 
-        # AI'a mesaj + konuşma geçmişi + dolap bilgisi gönder
+        # AI'a mesaj + konuşma geçmişini gönder
         yanit = ai_service.yanit_uret(
-            mesaj=mesaj,
-            dolap_listesi=dolap_ozeti,
-            gecmis=gecmis
+            mesaj,
+            dolap_ozeti,
+            gecmis
         )
 
         return jsonify({
@@ -223,16 +214,13 @@ def ai_sohbet_route():
     except AIServiceError as e:
 
         logger.warning(
-            "AI servis hatası: %s",
+            "AI servis hatasi: %s",
             str(e)
         )
 
         return jsonify({
             "basari": False,
-            "mesaj": (
-                "Şu anda yanıt veremiyorum, "
-                "lütfen daha sonra tekrar deneyin."
-            )
+            "mesaj": "Şu anda yanıt veremiyorum, lütfen daha sonra tekrar deneyin."
         }), 503
 
     except Exception:
@@ -245,8 +233,6 @@ def ai_sohbet_route():
             "basari": False,
             "mesaj": "Bir şeyler ters gitti."
         }), 500
-
-
 # =========================
 # LEAD KAYDET
 # =========================
