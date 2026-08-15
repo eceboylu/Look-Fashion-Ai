@@ -1,6 +1,8 @@
 import requests
 import logging
+
 from config import Config
+
 
 logger = logging.getLogger(__name__)
 
@@ -16,27 +18,26 @@ class AIService:
         self.model = "llama-3.1-8b-instant"
         self.url = "https://api.groq.com/openai/v1/chat/completions"
 
-    def yanit_uret(self, mesaj, dolap_listesi="", gecmis=None):
+    def yanit_uret(self, mesaj, gecmis=None):
 
         if not self.api_key:
-            raise AIServiceError("Groq API anahtarı bulunamadı.")
+            raise AIServiceError(
+                "Groq API anahtarı bulunamadı."
+            )
 
         headers = {
             "Authorization": f"Bearer {self.api_key}",
             "Content-Type": "application/json"
         }
 
-        system_prompt = Config.BUSINESS_CONTEXT.format(
-    dolap_listesi=(
-        dolap_listesi
-        if dolap_listesi
-        else "Henüz dolaba kıyafet eklenmemiş."
-    )
-)
+        # Satış asistanının tüm davranış kuralları
+        # Config.BUSINESS_CONTEXT içerisinde tutulur.
+        system_prompt = Config.BUSINESS_CONTEXT
 
-        # Groq'a gönderilecek mesaj listesi.
-        # Önce sistem talimatı, sonra geçmiş konuşmalar,
-        # en son yeni kullanıcı mesajı gönderilir.
+        # Groq'a gönderilecek mesajlar:
+        # 1. Sistem talimatı
+        # 2. Önceki konuşma geçmişi
+        # 3. Yeni kullanıcı mesajı
         messages = [
             {
                 "role": "system",
@@ -44,11 +45,9 @@ class AIService:
             }
         ]
 
-        # Önceki konuşma geçmişini ekle.
         if gecmis:
             messages.extend(gecmis)
 
-        # Yeni kullanıcı mesajını konuşmanın en sonuna ekle.
         messages.append({
             "role": "user",
             "content": mesaj
@@ -84,7 +83,19 @@ class AIService:
 
             data = response.json()
 
-            return data["choices"][0]["message"]["content"]
+            try:
+                return data["choices"][0]["message"]["content"]
+
+            except (KeyError, IndexError, TypeError):
+
+                logger.error(
+                    "Groq API beklenmeyen cevap döndürdü: %s",
+                    data
+                )
+
+                raise AIServiceError(
+                    "Yapay zeka geçerli bir cevap oluşturamadı."
+                )
 
         logger.error(
             "Groq API hatası: %s - %s",

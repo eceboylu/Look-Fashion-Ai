@@ -3,14 +3,14 @@ import logging
 from flask import Blueprint, render_template, request, jsonify
 
 from app.database import (
-    kiyafet_ekle,
-    tum_kiyafetleri_getir,
-    kiyafet_durum_guncelle,
     lead_ekle,
     tum_leadleri_getir,
 )
 
-from app.services.ai_service import ai_service, AIServiceError
+from app.services.ai_service import (
+    ai_service,
+    AIServiceError,
+)
 
 
 logger = logging.getLogger(__name__)
@@ -44,146 +44,29 @@ def dashboard():
 
 @api_bp.route("/health", methods=["GET"])
 def health_check():
+
     return jsonify({
         "basari": True,
-        "mesaj": "AI Wardrobe API aktif ve çalışıyor!"
+        "mesaj": "Fashion Look AI API aktif ve çalışıyor!"
     }), 200
-
-
-# =========================
-# KIYAFET EKLE
-# =========================
-
-@api_bp.route("/kiyafetler", methods=["POST"])
-def kiyafet_ekle_route():
-
-    data = request.get_json()
-
-    if not data or not all(
-        k in data for k in ("tur", "kategori", "renk", "stil", "mevsim")
-    ):
-        return jsonify({
-            "basari": False,
-            "mesaj": "Eksik veri gönderildi!"
-        }), 400
-
-    try:
-
-        yeni_id = kiyafet_ekle(
-            data["tur"],
-            data["kategori"],
-            data["renk"],
-            data["stil"],
-            data["mevsim"],
-            data.get("fotograf_url", "")
-        )
-
-        return jsonify({
-            "basari": True,
-            "mesaj": "Kıyafet başarıyla dolaba eklendi!",
-            "id": yeni_id
-        }), 201
-
-    except Exception:
-
-        logger.exception("Kıyafet eklenirken hata oluştu")
-
-        return jsonify({
-            "basari": False,
-            "mesaj": "Kıyafet eklenemedi, lütfen tekrar deneyin."
-        }), 500
-
-
-# =========================
-# KIYAFETLERİ GETİR
-# =========================
-
-@api_bp.route("/kiyafetler", methods=["GET"])
-def kiyafetleri_getir_route():
-
-    try:
-
-        sadece_aktif = (
-            request.args.get("aktif", "false").lower() == "true"
-        )
-
-        kiyafetler = tum_kiyafetleri_getir(
-            sadece_aktif=sadece_aktif
-        )
-
-        return jsonify({
-            "basari": True,
-            "veri": kiyafetler
-        }), 200
-
-    except Exception:
-
-        logger.exception("Kıyafetler getirilirken hata oluştu")
-
-        return jsonify({
-            "basari": False,
-            "mesaj": "Kıyafetler alınamadı."
-        }), 500
-
-
-# =========================
-# KIYAFET DURUM GÜNCELLE
-# =========================
-
-@api_bp.route(
-    "/kiyafetler/<int:kiyafet_id>/durum",
-    methods=["PUT"]
-)
-def durum_guncelle_route(kiyafet_id):
-
-    data = request.get_json()
-
-    yeni_durum = data.get("durum") if data else None
-
-    if yeni_durum not in ["aktif", "kirli"]:
-
-        return jsonify({
-            "basari": False,
-            "mesaj": "Geçersiz durum!"
-        }), 400
-
-    try:
-
-        kiyafet_durum_guncelle(
-            kiyafet_id,
-            yeni_durum
-        )
-
-        return jsonify({
-            "basari": True,
-            "mesaj": f"Kıyafet durumu {yeni_durum} olarak güncellendi."
-        }), 200
-
-    except Exception:
-
-        logger.exception(
-            "Kıyafet durumu güncellenirken hata oluştu"
-        )
-
-        return jsonify({
-            "basari": False,
-            "mesaj": "Durum güncellenemedi."
-        }), 500
 
 
 # =========================
 # AI SOHBET
 # =========================
 
-@api_bp.route('/sohbet', methods=['POST'])
+@api_bp.route("/sohbet", methods=["POST"])
 def ai_sohbet_route():
 
     data = request.get_json()
 
-    mesaj = data.get('mesaj', '') if data else ''
-    gecmis = data.get('gecmis', []) if data else []
+    mesaj = data.get("mesaj", "") if data else ""
+    gecmis = data.get("gecmis", []) if data else []
+
+    mesaj = mesaj.strip()
 
     if not mesaj:
+
         return jsonify({
             "basari": False,
             "mesaj": "Mesaj boş olamaz!"
@@ -191,18 +74,10 @@ def ai_sohbet_route():
 
     try:
 
-        # Sadece aktif kıyafetleri AI'a gönder
-        aktif_dolap = tum_kiyafetleri_getir(sadece_aktif=True)
-
-        dolap_ozeti = ", ".join([
-            f"{k['tur']} ({k['renk']}, {k['stil']})"
-            for k in aktif_dolap
-        ])
-
-        # AI'a mesaj + konuşma geçmişini gönder
+        # AI artık gardırop veya kıyafet verisi almıyor.
+        # Sadece kullanıcının mesajı ve konuşma geçmişi gönderiliyor.
         yanit = ai_service.yanit_uret(
             mesaj,
-            dolap_ozeti,
             gecmis
         )
 
@@ -214,13 +89,16 @@ def ai_sohbet_route():
     except AIServiceError as e:
 
         logger.warning(
-            "AI servis hatasi: %s",
+            "AI servis hatası: %s",
             str(e)
         )
 
         return jsonify({
             "basari": False,
-            "mesaj": "Şu anda yanıt veremiyorum, lütfen daha sonra tekrar deneyin."
+            "mesaj": (
+                "Şu anda yanıt veremiyorum. "
+                "Lütfen biraz sonra tekrar deneyin."
+            )
         }), 503
 
     except Exception:
@@ -233,6 +111,8 @@ def ai_sohbet_route():
             "basari": False,
             "mesaj": "Bir şeyler ters gitti."
         }), 500
+
+
 # =========================
 # LEAD KAYDET
 # =========================
@@ -242,9 +122,18 @@ def lead_ekle_route():
 
     data = request.get_json()
 
-    if not data or not all(
-        k in data for k in ("isim", "telefon")
-    ):
+    if not data:
+
+        return jsonify({
+            "basari": False,
+            "mesaj": "Veri gönderilmedi!"
+        }), 400
+
+    isim = data.get("isim", "").strip()
+    telefon = data.get("telefon", "").strip()
+    mesaj = data.get("mesaj", "").strip()
+
+    if not isim or not telefon:
 
         return jsonify({
             "basari": False,
@@ -254,14 +143,14 @@ def lead_ekle_route():
     try:
 
         yeni_id = lead_ekle(
-            data["isim"],
-            data["telefon"],
-            data.get("mesaj", "")
+            isim,
+            telefon,
+            mesaj
         )
 
         return jsonify({
             "basari": True,
-            "mesaj": "Lead başarıyla kaydedildi!",
+            "mesaj": "Bilgileriniz başarıyla kaydedildi!",
             "id": yeni_id
         }), 201
 
@@ -273,7 +162,10 @@ def lead_ekle_route():
 
         return jsonify({
             "basari": False,
-            "mesaj": "Kayıt yapılamadı, lütfen tekrar deneyin."
+            "mesaj": (
+                "Bilgiler kaydedilemedi. "
+                "Lütfen tekrar deneyin."
+            )
         }), 500
 
 
@@ -303,4 +195,3 @@ def leads_getir_route():
             "basari": False,
             "mesaj": "Lead listesi alınamadı."
         }), 500
-

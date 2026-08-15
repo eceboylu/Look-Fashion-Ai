@@ -1,198 +1,360 @@
-Fashion Look Ai — Akıllı Gardırop ve Kişisel Stil Asistanı
+# Fashion Look AI — Akıllı Gardırop ve Kişisel Stil Asistanı
 
-Fashion Look Ai, kullanıcıların yapay zekâ ile konuşup kişiye özel stil ve kombin önerileri almasını sağlayan bir stil asistanıdır.
+Fashion Look AI, kullanıcıların gardıroplarını dijitalleştirmelerine
+ve yapay zeka destekli kişisel stil önerileri almalarına yardımcı
+olmayı amaçlayan bir dijital gardırop ve stil asistanı platformudur.
 
-##  Proje Bağlantıları
+Uygulamanın temel amacı kullanıcıların her gün karşılaştığı
+"Bugün ne giyeceğim?" problemini daha kolay hale getirmektir.
 
-* Canlı Backend (Render): https://look-fashion-ai.onrender.com
-* Wix Canlı Arayüz: https://eceboylu.wixstudio.com/fashion-look-ai
+Kullanıcı kıyafetlerini sisteme ekledikten sonra yapay zeka;
+kıyafetleri analiz ederek kombin oluşturabilir, hava durumunu
+ve kullanım amacını dikkate alarak kişiselleştirilmiş stil
+önerileri sunabilir.
 
-## Proje Özellikleri
+---
 
-*  Yapay zekâ destekli stil asistanı
-*  Kişiselleştirilmiş kombin önerileri
-*  Renk ve stil uyumu önerileri
-*  Mevsim ve hava koşullarına göre kombin önerileri
-*  Türkçe doğal dil ile AI sohbeti
-*  İletişim formu
-*  Yönetim paneli
-*  Wix Studio ve Wix Velo entegrasyonu
-*  Render üzerinde canlı backend
-*  Güvenli API anahtarı yönetimi
+## Proje Bağlantıları
 
-## Proje Mimarisi
+- Canlı Backend (Render):
+  https://look-fashion-ai.onrender.com
 
-Proje, **Separation of Concerns** prensibine göre tasarlandı.
+- Wix Canlı Arayüz:
+  https://eceboylu.wixstudio.com/fashion-look-ai
 
-```text
-AI-Wardrobe/
-│
-├── run.py
-├── config.py
-├── requirements.txt
-├── .env
-├── .gitignore
-│
-└── app/
-├── __init__.py
-├── database.py
-├── routes.py
-│
-├── services/
-│ ├── __init__.py
-│ └── ai_service.py
-│
-└── templates/
-├── index.html
-└── dashboard.html
-```
+---
 
-### Katmanlar
+# Proje Özellikleri
 
-**config.py**
+- Yapay zeka destekli kişisel stil asistanı
+- Dijital gardırop
+- Kişiselleştirilmiş kombin önerileri
+- Renk ve stil uyumu
+- Mevsim ve hava durumuna göre kombin önerileri
+- Etkinlik bazlı stil önerileri
+- Kombin geçmişi
+- Kirli kıyafet takibi
+- Bavul hazırlama desteği
+- Alışveriş önerileri
+- Gardırop analizi
+- Türkçe doğal dil ile AI sohbeti
+- İletişim formu
+- Lead yönetimi
+- Yönetim paneli
+- Wix Studio ve Wix Velo entegrasyonu
+- Render üzerinde canlı backend
+- Groq API entegrasyonu
+- Güvenli API anahtarı yönetimi
 
-Uygulamanın ayarlarını ve ortam değişkenlerini yönetir.
+---
 
-**database.py**
+# Projenin Temel Amacı
 
-Veritabanı işlemlerini yönetir.
+Günlük hayatta kullanıcıların en sık karşılaştığı sorunlardan
+biri sahip oldukları kıyafetlerle ne giyeceklerine karar
+verememeleridir.
 
-**ai_service.py**
+Fashion Look AI bu problemi yapay zeka destekli bir dijital
+gardırop yaklaşımıyla çözmeyi amaçlar.
 
-Yapay zekâ API bağlantısını yönetir.
+Temel fikir:
 
-**routes.py**
+> "Dolabındaki kıyafetleri bir kez ekle,
+> yapay zeka sana her gün ne giyebileceğini önersin."
 
-HTTP isteklerini alır ve ilgili katmanları çağırır.
+---
 
-**app/**init**.py**
+# Dijital Gardırop
 
-Flask, uygulama fabrikası yapısını kurar.
+Kullanıcı kıyafetlerini sisteme ekleyerek dijital bir gardırop
+oluşturabilir.
 
-**run.py**
+Desteklenebilecek ürünler arasında:
 
-Uygulamanın başlangıç noktasıdır.
+- Tişört
+- Gömlek
+- Crop
+- Sweatshirt
+- Ceket
+- Pantolon
+- Şort
+- Etek
+- Elbise
+- Ayakkabı
+- Çanta
+- Kemer
+- Kolye
+- Küpe
+- Bileklik
+- Saat
+- Şapka
+- Gözlük
 
-## Yapay Zekâ Asistanı
+gibi kıyafet ve aksesuarlar bulunur.
 
-AI Wardrobe'un temel özelliği, yapay zekâ destekli stil danışmanıdır.
+---
+
+# Yapay Zeka ile Kıyafet Analizi
+
+Kullanıcı kıyafetlerini sisteme eklediğinde yapay zeka
+görüntüleri analiz ederek kıyafetlerin özelliklerini
+belirlemeye yardımcı olabilir.
+
+Analiz edilebilecek bilgiler:
+
+- Ürün türü
+- Kategori
+- Renk
+- Stil
+- Desen
+- Mevsim
+- Kullanım amacı
+
+Örneğin bir gömlek sisteme eklendiğinde yapay zeka bunu:
+
+Ürün:
+Oversize Beyaz Gömlek
+
+Kategori:
+Gömlek
+
+Renk:
+Beyaz
+
+Stil:
+Casual
+
+Mevsim:
+İlkbahar / Yaz
+
+şeklinde sınıflandırabilir.
+
+---
+
+# Yapay Zeka Destekli Kombin
+
+Fashion Look AI'ın temel özelliklerinden biri,
+kullanıcının kendi dijital gardırobundan kombinler
+oluşturabilmesidir.
+
+Yapay zeka kombin oluştururken:
+
+- Üst
+- Alt
+- Ayakkabı
+- Çanta
+- Ceket
+- Takı
+- Saat
+- Kemer
+- Diğer aksesuarlar
+
+gibi parçaları birlikte değerlendirebilir.
+
+Kombin oluşturma sırasında:
+
+- Renk uyumu
+- Stil uyumu
+- Mevsim
+- Hava durumu
+- Kullanım amacı
+- Etkinlik
+- Kullanıcının stil tercihleri
+
+dikkate alınabilir.
+
+---
+
+# Hava Durumuna Göre Stil Önerileri
+
+Fashion Look AI, hava durumunu kombin önerilerinde
+kullanabilecek şekilde tasarlanmıştır.
+
+Örneğin sıcak bir günde:
+
+- Tişört
+- Şort
+- Sneaker
+
+gibi daha hafif parçalar önerilebilir.
+
+Yağmurlu veya soğuk havalarda ise:
+
+- Ceket
+- Trençkot
+- Bot
+
+gibi hava koşullarına uygun parçalar değerlendirilebilir.
+
+---
+
+# Etkinlik Bazlı Kombin
+
+Kullanıcı farklı etkinliklere göre stil önerileri alabilir.
+
+Örneğin:
+
+- İş toplantısı
+- Düğün
+- Mezuniyet
+- Doğum günü
+- Akşam yemeği
+- Date
+- Günlük kullanım
+
+gibi farklı durumlar için uygun kombinler oluşturulabilir.
+
+---
+
+# Kirli Kıyafet Takibi
+
+Kullanıcının giydiği ve henüz yıkanmamış kıyafetleri
+"Kirli Sepeti" bölümünde takip edilebilir.
+
+Kirli durumdaki kıyafetler yeni kombin önerilerinde
+kullanılmayacak şekilde değerlendirilebilir.
+
+Kıyafet tekrar temizlendiğinde kullanıcı ürünü
+yeniden aktif hale getirebilir.
+
+---
+
+# Kombin Geçmişi
+
+Daha önce oluşturulan kombinler kayıt altında tutulabilir.
+
+Bu sayede yapay zeka:
+
+- Aynı kombinlerin sürekli tekrar edilmesini önlemeye
+- Daha az kullanılan kıyafetleri değerlendirmeye
+- Kullanıcının stil tercihlerini anlamaya
+
+yardımcı olabilir.
+
+---
+
+# Bavul Hazırlama Asistanı
+
+Kullanıcı seyahate çıkarken:
+
+- Gideceği şehir
+- Seyahat süresi
+- Hava koşulları
+
+gibi bilgileri kullanarak bavulunu planlayabilir.
+
+Yapay zeka gerekli kıyafetleri seçmeye yardımcı olarak
+gereksiz eşya taşınmasını azaltmayı amaçlar.
+
+---
+
+# Alışveriş Asistanı
+
+Fashion Look AI yalnızca mevcut gardırobu yönetmekle kalmayıp
+kullanıcının eksik parçalarını belirlemeye de yardımcı olabilir.
+
+Örneğin:
+
+> "Siyah klasik bir sneaker eklemek mevcut gardırobundaki
+> birçok parçayla yeni kombinler oluşturmanı sağlayabilir."
+
+Bu sayede kullanıcı daha bilinçli alışveriş yapabilir.
+
+---
+
+# Gardırop Analizi
+
+Yapay zeka gardırop kullanımına ilişkin çeşitli analizler
+sunabilecek şekilde tasarlanmıştır.
+
+Örneğin:
+
+- En çok kullanılan kıyafetler
+- En az kullanılan kıyafetler
+- En çok tercih edilen renkler
+- En çok kullanılan stiller
+- Mevsimsel kullanım
+- Uzun süredir kullanılmayan ürünler
+
+analiz edilebilir.
+
+---
+
+# AI Stil Asistanı
+
+Wix üzerindeki AI chatbot, Fashion Look AI'ın
+kişisel stil danışmanı olarak çalışır.
 
 Kullanıcı örneğin:
 
-> "Bugün ne giysem?"
+> "Fashion Look AI ne işe yarıyor?"
 
-veya
+> "Kombin yapabiliyor mu?"
 
-"Siyah pantolonumu nasıl kombinleyebilirim?"
+> "Hava durumuna göre öneri veriyor mu?"
+
+> "Düğün için kombin oluşturabilir mi?"
+
+> "Nasıl çalışıyor?"
 
 gibi sorular sorabilir.
 
-Asistan, renk, stil, mevsim, kullanım amacı ve mevcut bilgilere göre Türkçe ve uygulanabilir kombin önerileri sunar.
+Chatbot bu soruları Türkçe ve doğal bir şekilde yanıtlar.
 
-Yapay zekâ hizmetinde **Groq API** kullanılır.
+Chatbotun temel amacı kullanıcıya ürünün sağlayabileceği
+faydaları anlatmak ve kullanıcı ilgilendiğinde ürünü
+deneyimlemeye yönlendirmektir.
 
-Kullanılan model:
+---
 
-```text
-llama-3.1-8b-instant
-```
+# Chatbot Davranışı
 
-AI davranışı, `BUSINESS_CONTEXT` üzerinden tanımlandı.
-### Kullanıcı Akışı
+Chatbot:
+
+- Türkçe konuşur.
+- Kısa ve anlaşılır cevaplar verir.
+- Kişisel stil danışmanı gibi davranır.
+- Fashion Look AI'ın özelliklerini anlatır.
+- Kullanıcının stil problemini anlamaya çalışır.
+- Kombin özelliğini tanıtır.
+- Hava durumu ve etkinlik bazlı önerilerden bahsedebilir.
+- Kullanıcı ilgilendiğinde iletişim formuna yönlendirir.
+
+Chatbot içerisinde kullanıcıdan:
+
+- Telefon numarası
+- E-posta
+- Fotoğraf
+- Kıyafet listesi
+
+istenmez.
+
+Kullanıcı kendi dolabıyla gerçek deneyimi yaşamak
+veya daha detaylı bilgi almak istediğinde iletişim
+formuna yönlendirilir.
+
+---
+
+# Kullanıcı Akışı
 
 ```text
 Kullanıcı
-↓
+    ↓
 Wix Studio
-↓
-AI mesajı
-↓
+    ↓
+AI Chatbot
+    ↓
 Wix Velo
-↓
+    ↓
 Flask API
-↓
+    ↓
 AI Service
-↓
+    ↓
 Groq API
-↓
-AI cevabı
-↓
+    ↓
+AI Cevabı
+    ↓
 Wix Studio
-↓
+    ↓
 Kullanıcı
 ```
-
-Kullanıcı, istediği zaman stil asistanına sorular sorabilir. AI tarafından oluşturulan yanıtları doğrudan arayüzde görebilir.
-
-##  İletişim Formu
-
-Daha fazla destek almak isteyen kullanıcı, iletişim formunu doldurarak:
-
-* İsim
-* Telefon
-* Mesaj
-
-bilgilerini bırakabilir. Bu bilgiler backend'e gönderilir ve kaydedilir.
-
-##  Yönetim Paneli
-
-You can view incoming contact records in the project's management panel. In the panel:
-
-* İsim
-* Telefon
-* Mesaj
-* Tarih
-
-Bilgiler listelenir. Lead kayıtları, Wix Repeater ile yönetim panelinde gösterilir.
-
-##  Wix Studio Entegrasyonu
-
-Frontend tarafında **Wix Studio + Wix Velo** kullanıldı. Wix, backend ile bağlantı kurar ve:
-
-* AI sohbet isteklerini
-* AI cevaplarını
-* İletişim formu gönderimlerini
-* Yönetim panelindeki kayıtları
-
-yönetmektedir.
-
-## 🔌 Backend API
-
-### Health Check
-
-```text
-GET /api/health
-```
-
-Backend'in çalışıp çalışmadığını kontrol eder.
-
-### AI Sohbet
-
-```text
-POST /api/sohbet
-```
-
-Kullanıcının mesajını AI servisine yollar.
-
-### Lead Kaydetme
-
-```text
-POST /api/leads
-```
-
-İletişim formundan gelen kullanıcı bilgilerini kaydeder.
-
-### Lead Listeleme
-
-```text
-GET /api/leads
-```
-
-Kayıtlı iletişim bilgilerini yönetim paneline yollar.
-
-##  Güvenlik
-
-* API anahtarları `.env` dosyası ile yönetiliyor.
-* `.env` dosyası GitHub'a yüklenmez.
-* SQL sorgularında parametreli sorgular kullanılır.
-* API ve veritabanı hataları `try-except` ile kontrol ediliyor.

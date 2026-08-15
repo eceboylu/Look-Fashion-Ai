@@ -3,104 +3,535 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Wardrobe - Stil Asistanı</title>
+
+<title>Fashion Look Ai - Akıllı Gardırop ve Kişisel Stil Asistanı</title>
+
 <script src="https://cdn.tailwindcss.com"></script>
+
 <style>
-body{font-family:Inter,system-ui,sans-serif}
-.glass{background:rgba(255,255,255,.72);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.8)}
+body{
+    font-family:Inter,system-ui,sans-serif;
+}
+
+.glass{
+    background:rgba(255,255,255,.72);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+    border:1px solid rgba(255,255,255,.8);
+}
 </style>
 </head>
+
 <body class="min-h-screen bg-gradient-to-br from-violet-50 via-white to-indigo-50 text-slate-800">
 
+<!-- HEADER -->
 <header class="px-6 md:px-10 py-5 flex items-center justify-between max-w-7xl mx-auto">
-  <div class="flex items-center gap-3">
-    <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-violet-600 to-indigo-600 flex items-center justify-center text-xl shadow-lg">👗</div>
-    <div><div class="font-bold text-lg">AI Wardrobe</div><div class="text-xs text-slate-500">Personal Style Assistant</div></div>
-  </div>
-  <nav class="hidden md:flex gap-7 text-sm font-medium text-slate-500">
-    <a href="/" class="text-violet-600">Ana Sayfa</a>
-    <a href="/dashboard" class="hover:text-violet-600">Yönetim</a>
-  </nav>
+
+    <div class="flex items-center gap-3">
+
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-violet-600 to-indigo-600 flex items-center justify-center text-xl shadow-lg">
+            👗
+        </div>
+
+        <div>
+            <div class="font-bold text-lg">
+                Fashion Look Ai
+            </div>
+
+            <div class="text-xs text-slate-500">
+                Akıllı Gardırop & Kişisel Stil Asistanı
+            </div>
+        </div>
+
+    </div>
+
+    <nav class="hidden md:flex gap-7 text-sm font-medium text-slate-500">
+
+        <a href="/" class="text-violet-600">
+            Ana Sayfa
+        </a>
+
+        <a href="/dashboard" class="hover:text-violet-600">
+            Yönetim
+        </a>
+
+    </nav>
+
 </header>
 
+
 <main class="max-w-7xl mx-auto px-6 md:px-10 py-10 md:py-20">
+
+<!-- HERO -->
 <section class="grid lg:grid-cols-2 gap-14 items-center">
 
 <div>
-  <span class="inline-flex px-4 py-2 rounded-full bg-violet-100 text-violet-700 text-xs font-bold mb-6">✨ AI DESTEKLİ KİŞİSEL STİL</span>
-  <h1 class="text-5xl md:text-6xl font-black tracking-tight leading-tight text-slate-900">
-    Bugün ne<br><span class="text-violet-600">giyeceğini</span><br>AI'ya sor.
-  </h1>
-  <p class="mt-6 text-lg leading-8 text-slate-500 max-w-xl">
-    Dolabındaki kıyafetleri bilen, tarzını öğrenen ve sana özel kombinler hazırlayan kişisel stil asistanın.
-  </p>
-  <div class="mt-8 flex flex-wrap gap-3">
-    <span class="px-4 py-2 bg-white rounded-xl shadow-sm border text-sm">👗 Dijital Gardırop</span>
-    <span class="px-4 py-2 bg-white rounded-xl shadow-sm border text-sm">✨ AI Kombin</span>
-    <span class="px-4 py-2 bg-white rounded-xl shadow-sm border text-sm">🌤️ Hava Durumu</span>
-  </div>
-</div>
 
-<div class="glass rounded-[2rem] shadow-2xl shadow-violet-200/40 p-5 md:p-7">
-  <div class="flex items-center gap-3 pb-5 border-b border-white">
-    <div class="w-11 h-11 rounded-2xl bg-violet-100 flex items-center justify-center">✨</div>
-    <div><b>AI Stil Asistanı</b><div class="text-xs text-green-600 mt-1">● Çevrimiçi</div></div>
-  </div>
+    <span class="inline-flex px-4 py-2 rounded-full bg-violet-100 text-violet-700 text-xs font-bold mb-6">
+        ✨ AI DESTEKLİ KİŞİSEL STİL
+    </span>
 
-  <div class="mt-6 space-y-4">
-    <div class="max-w-[85%] bg-white rounded-2xl rounded-tl-sm p-4 shadow-sm text-sm leading-6">
-      Merhaba! 👋 Bugün nereye gideceğini ve nasıl görünmek istediğini anlat. Sana uygun bir kombin hazırlayayım.
+    <h1 class="text-5xl md:text-6xl font-black tracking-tight leading-tight text-slate-900">
+
+        Bugün ne<br>
+
+        <span class="text-violet-600">
+            giyeceğini
+        </span>
+
+        <br>
+
+        AI'ya sor.
+
+    </h1>
+
+    <p class="mt-6 text-lg leading-8 text-slate-500 max-w-xl">
+
+        Fashion Look Ai, kıyafetlerini dijital gardırobuna taşıyarak
+        sana özel kombinler oluşturabilen yapay zekâ destekli
+        kişisel stil asistanıdır.
+
+    </p>
+
+
+    <div class="mt-8 flex flex-wrap gap-3">
+
+        <span class="px-4 py-2 bg-white rounded-xl shadow-sm border text-sm">
+            👗 Dijital Gardırop
+        </span>
+
+        <span class="px-4 py-2 bg-white rounded-xl shadow-sm border text-sm">
+            ✨ AI Kombin
+        </span>
+
+        <span class="px-4 py-2 bg-white rounded-xl shadow-sm border text-sm">
+            🌤️ Hava Durumuna Göre Stil
+        </span>
+
+        <span class="px-4 py-2 bg-white rounded-xl shadow-sm border text-sm">
+            🎯 Etkinliğe Özel Öneriler
+        </span>
+
     </div>
 
-    <textarea id="inputMesaj" rows="4" class="w-full resize-none rounded-2xl border border-slate-200 bg-white/80 p-4 outline-none focus:ring-2 focus:ring-violet-400" placeholder="Örn: Bugün arkadaşlarımla kafeye gideceğim..."></textarea>
+</div>
 
-    <button id="btnSor" onclick="kombinIste()" class="w-full rounded-2xl bg-gradient-to-r from-violet-600 to-indigo-600 py-4 text-white font-bold shadow-lg shadow-violet-200 hover:scale-[1.01] transition">
-      ✨ Kombin Önerisi Al
-    </button>
 
-    <div id="textCevap" class="hidden rounded-2xl bg-violet-50 border border-violet-100 p-5 text-sm leading-7 text-slate-700"></div>
-  </div>
+<!-- AI CHAT -->
+<div class="glass rounded-[2rem] shadow-2xl shadow-violet-200/40 p-5 md:p-7">
+
+    <div class="flex items-center gap-3 pb-5 border-b border-white">
+
+        <div class="w-11 h-11 rounded-2xl bg-violet-100 flex items-center justify-center">
+            ✨
+        </div>
+
+        <div>
+
+            <b>
+                Fashion Look Ai
+            </b>
+
+            <div class="text-xs text-green-600 mt-1">
+                ● Çevrimiçi
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="mt-6 space-y-4">
+
+        <!-- AI WELCOME -->
+        <div class="max-w-[90%] bg-white rounded-2xl rounded-tl-sm p-4 shadow-sm text-sm leading-6">
+
+            Merhaba! 👋
+
+            <br><br>
+
+            Fashion Look Ai, dolabındaki kıyafetleri analiz ederek
+            sana tarzına, hava durumuna ve gideceğin ortama uygun
+            kombinler oluşturabilir.
+
+            <br><br>
+
+            Merak ettiğin bir şeyi bana sorabilirsin.
+
+        </div>
+
+
+        <!-- USER INPUT -->
+        <textarea
+            id="inputMesaj"
+            rows="4"
+            class="w-full resize-none rounded-2xl border border-slate-200 bg-white/80 p-4 outline-none focus:ring-2 focus:ring-violet-400"
+            placeholder="Örn: Fashion Look Ai nasıl kombin oluşturuyor?"
+        ></textarea>
+
+
+        <button
+            id="btnSor"
+            onclick="kombinIste()"
+            class="w-full rounded-2xl bg-gradient-to-r from-violet-600 to-indigo-600 py-4 text-white font-bold shadow-lg shadow-violet-200 hover:scale-[1.01] transition"
+        >
+            ✨ AI'ya Sor
+        </button>
+
+
+        <!-- AI RESPONSE -->
+        <div
+            id="textCevap"
+            class="hidden rounded-2xl bg-violet-50 border border-violet-100 p-5 text-sm leading-7 text-slate-700"
+        ></div>
+
+    </div>
+
 </div>
 
 </section>
 
+
+<!-- PRODUCT BENEFITS -->
+<section class="max-w-5xl mx-auto mt-20">
+
+    <div class="text-center mb-10">
+
+        <span class="text-violet-600 text-sm font-bold">
+            💜 FASHION LOOK AI
+        </span>
+
+        <h2 class="text-3xl font-bold mt-2">
+            Dolabındaki kıyafetleri daha akıllı kullan.
+        </h2>
+
+        <p class="text-slate-500 mt-3 max-w-2xl mx-auto">
+
+            Kıyafetlerini bir kez dijital gardırobuna ekle.
+            Fashion Look Ai, parçalarını analiz ederek
+            sana farklı durumlara uygun kombinler önersin.
+
+        </p>
+
+    </div>
+
+
+    <div class="grid md:grid-cols-3 gap-5">
+
+        <div class="bg-white rounded-3xl border p-6 shadow-sm">
+
+            <div class="text-3xl mb-4">
+                👗
+            </div>
+
+            <h3 class="font-bold text-lg">
+                Dijital Gardırop
+            </h3>
+
+            <p class="text-sm text-slate-500 mt-2 leading-6">
+
+                Kıyafetlerini dijital ortamda düzenleyerek
+                gardırobunu daha kolay yönetebilirsin.
+
+            </p>
+
+        </div>
+
+
+        <div class="bg-white rounded-3xl border p-6 shadow-sm">
+
+            <div class="text-3xl mb-4">
+                ✨
+            </div>
+
+            <h3 class="font-bold text-lg">
+                AI Kombin Önerileri
+            </h3>
+
+            <p class="text-sm text-slate-500 mt-2 leading-6">
+
+                Yapay zekâ, sahip olduğun parçaları
+                birbiriyle eşleştirerek kişisel kombinler
+                oluşturabilir.
+
+            </p>
+
+        </div>
+
+
+        <div class="bg-white rounded-3xl border p-6 shadow-sm">
+
+            <div class="text-3xl mb-4">
+                🌤️
+            </div>
+
+            <h3 class="font-bold text-lg">
+                Duruma Göre Stil
+            </h3>
+
+            <p class="text-sm text-slate-500 mt-2 leading-6">
+
+                Hava durumu, mevsim ve etkinliğe göre
+                daha uygun kombin alternatifleri sunabilir.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CONTACT / LEAD FORM -->
 <section class="max-w-3xl mx-auto mt-20">
-<div class="text-center mb-7">
-  <span class="text-violet-600 text-sm font-bold">💜 KİŞİSELLEŞTİR</span>
-  <h2 class="text-3xl font-bold mt-2">Daha kişisel öneriler ister misin?</h2>
-  <p class="text-slate-500 mt-2">Sana daha detaylı stil önerileri sunabilmemiz için bilgilerini bırakabilirsin.</p>
-</div>
 
-<div class="bg-white rounded-3xl shadow-xl border p-6 md:p-8">
-  <div class="grid md:grid-cols-2 gap-4">
-    <input id="inputIsim" class="rounded-2xl border p-4 outline-none focus:ring-2 focus:ring-violet-400" placeholder="Ad Soyad">
-    <input id="inputTelefon" class="rounded-2xl border p-4 outline-none focus:ring-2 focus:ring-violet-400" placeholder="Telefon Numaran">
-  </div>
-  <button id="btnKaydet" onclick="leadKaydet()" class="w-full mt-4 rounded-2xl bg-slate-900 hover:bg-violet-700 text-white py-4 font-bold transition">💜 Bilgilerimi Kaydet</button>
-  <div id="textDurum" class="text-center text-sm mt-4"></div>
-</div>
+    <div class="text-center mb-7">
+
+        <span class="text-violet-600 text-sm font-bold">
+            💜 DENEYİMLE
+        </span>
+
+        <h2 class="text-3xl font-bold mt-2">
+            Kendi dolabınla denemek ister misin?
+        </h2>
+
+        <p class="text-slate-500 mt-2">
+
+            Fashion Look Ai'ın kişisel stil özelliklerini
+            kendi gardırobunla deneyimlemek ve daha detaylı
+            bilgi almak için bizimle iletişime geçebilirsin.
+
+        </p>
+
+    </div>
+
+
+    <div class="bg-white rounded-3xl shadow-xl border p-6 md:p-8">
+
+        <div class="grid md:grid-cols-2 gap-4">
+
+            <input
+                id="inputIsim"
+                class="rounded-2xl border p-4 outline-none focus:ring-2 focus:ring-violet-400"
+                placeholder="Ad Soyad"
+            >
+
+            <input
+                id="inputTelefon"
+                class="rounded-2xl border p-4 outline-none focus:ring-2 focus:ring-violet-400"
+                placeholder="Telefon Numaran"
+            >
+
+        </div>
+
+
+        <button
+            id="btnKaydet"
+            onclick="leadKaydet()"
+            class="w-full mt-4 rounded-2xl bg-slate-900 hover:bg-violet-700 text-white py-4 font-bold transition"
+        >
+            💜 Bizimle İletişime Geç
+        </button>
+
+
+        <div
+            id="textDurum"
+            class="text-center text-sm mt-4"
+        ></div>
+
+    </div>
+
 </section>
+
 </main>
 
+
 <script>
+
 async function kombinIste(){
- const mesaj=document.getElementById('inputMesaj').value.trim();
- const cevap=document.getElementById('textCevap');
- if(!mesaj){alert('Lütfen nasıl bir kombin istediğini yaz.');return;}
- cevap.classList.remove('hidden'); cevap.innerText='✨ Yapay zeka kombinini hazırlıyor...';
- try{
-  const r=await fetch('/api/sohbet',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({mesaj})});
-  const d=await r.json(); cevap.innerText=d.basari?d.cevap:('Hata: '+(d.mesaj||'Bilinmeyen hata'));
- }catch(e){cevap.innerText='Sunucuya bağlanılamadı.';}
+
+    const mesaj =
+        document.getElementById('inputMesaj')
+        .value
+        .trim();
+
+    const cevap =
+        document.getElementById('textCevap');
+
+    const buton =
+        document.getElementById('btnSor');
+
+
+    if(!mesaj){
+
+        alert('Lütfen bir soru yaz.');
+
+        return;
+
+    }
+
+
+    cevap.classList.remove('hidden');
+
+    cevap.innerText =
+        '✨ Fashion Look Ai düşünüyor...';
+
+    buton.disabled = true;
+
+    buton.innerText =
+        'Yanıt hazırlanıyor...';
+
+
+    try{
+
+        const r = await fetch(
+            '/api/sohbet',
+            {
+                method:'POST',
+
+                headers:{
+                    'Content-Type':'application/json'
+                },
+
+                body:JSON.stringify({
+                    mesaj:mesaj,
+                    gecmis:[]
+                })
+            }
+        );
+
+
+        const d = await r.json();
+
+
+        if(d.basari){
+
+            cevap.innerText = d.cevap;
+
+        }else{
+
+            cevap.innerText =
+                d.mesaj ||
+                'Şu anda yanıt veremiyorum.';
+
+        }
+
+    }catch(e){
+
+        console.error(e);
+
+        cevap.innerText =
+            'Sunucuya bağlanılamadı. Lütfen daha sonra tekrar deneyin.';
+
+    }finally{
+
+        buton.disabled = false;
+
+        buton.innerText =
+            '✨ AI\'ya Sor';
+
+    }
+
 }
+
+
 async function leadKaydet(){
- const isim=document.getElementById('inputIsim').value.trim(), telefon=document.getElementById('inputTelefon').value.trim(), durum=document.getElementById('textDurum');
- if(!isim||!telefon){durum.className='text-center text-sm mt-4 text-red-600';durum.innerText='Lütfen ad ve telefon bilgilerini gir.';return;}
- try{
-  const r=await fetch('/api/leads',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({isim,telefon,mesaj:document.getElementById('inputMesaj').value})});
-  const d=await r.json(); durum.className='text-center text-sm mt-4 text-green-600'; durum.innerText=d.basari?'✓ Bilgilerin başarıyla kaydedildi!':'Kayıt sırasında hata oluştu.';
- }catch(e){durum.className='text-center text-sm mt-4 text-red-600';durum.innerText='Sunucuya bağlanılamadı.';}
+
+    const isim =
+        document
+        .getElementById('inputIsim')
+        .value
+        .trim();
+
+    const telefon =
+        document
+        .getElementById('inputTelefon')
+        .value
+        .trim();
+
+    const durum =
+        document.getElementById('textDurum');
+
+
+    if(!isim || !telefon){
+
+        durum.className =
+            'text-center text-sm mt-4 text-red-600';
+
+        durum.innerText =
+            'Lütfen ad ve telefon bilgilerini gir.';
+
+        return;
+
+    }
+
+
+    try{
+
+        const r = await fetch(
+            '/api/leads',
+            {
+                method:'POST',
+
+                headers:{
+                    'Content-Type':'application/json'
+                },
+
+                body:JSON.stringify({
+
+                    isim:isim,
+
+                    telefon:telefon,
+
+                    mesaj:
+                        document
+                        .getElementById('inputMesaj')
+                        .value
+                        .trim()
+
+                })
+            }
+        );
+
+
+        const d = await r.json();
+
+
+        if(d.basari){
+
+            durum.className =
+                'text-center text-sm mt-4 text-green-600';
+
+            durum.innerText =
+                '✓ Bilgilerin başarıyla kaydedildi. En kısa sürede seninle iletişime geçeceğiz.';
+
+        }else{
+
+            durum.className =
+                'text-center text-sm mt-4 text-red-600';
+
+            durum.innerText =
+                d.mesaj ||
+                'Kayıt sırasında hata oluştu.';
+
+        }
+
+    }catch(e){
+
+        console.error(e);
+
+        durum.className =
+            'text-center text-sm mt-4 text-red-600';
+
+        durum.innerText =
+            'Sunucuya bağlanılamadı.';
+
+    }
+
 }
+
 </script>
+
 </body>
 </html>
