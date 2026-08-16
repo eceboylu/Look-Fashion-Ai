@@ -31,7 +31,6 @@ class AIService:
         }
 
         # Satış asistanının tüm davranış kuralları
-        # Config.BUSINESS_CONTEXT içerisinde tutulur.
         system_prompt = Config.BUSINESS_CONTEXT
 
         # Groq'a gönderilecek mesajlar:
