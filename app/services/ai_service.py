@@ -30,13 +30,8 @@ class AIService:
             "Content-Type": "application/json"
         }
 
-        # Satış asistanının tüm davranış kuralları
         system_prompt = Config.BUSINESS_CONTEXT
 
-        # Groq'a gönderilecek mesajlar:
-        # 1. Sistem talimatı
-        # 2. Önceki konuşma geçmişi
-        # 3. Yeni kullanıcı mesajı
         messages = [
             {
                 "role": "system",
@@ -59,7 +54,6 @@ class AIService:
         }
 
         try:
-
             response = requests.post(
                 self.url,
                 json=payload,
@@ -74,9 +68,10 @@ class AIService:
                 str(e)
             )
 
+            print("GROQ HATASI:", repr(e))
+
             raise AIServiceError(
-                print("GROQ HATASI:", repr(e))
-    return f"AI hatası: {str(e)}"
+                f"AI bağlantı hatası: {str(e)}"
             )
 
         if response.status_code == 200:
@@ -99,6 +94,12 @@ class AIService:
 
         logger.error(
             "Groq API hatası: %s - %s",
+            response.status_code,
+            response.text
+        )
+
+        print(
+            "GROQ HATASI:",
             response.status_code,
             response.text
         )
