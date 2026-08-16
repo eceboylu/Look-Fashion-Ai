@@ -76,7 +76,8 @@ class AIService:
             )
 
             raise AIServiceError(
-                "Yapay zeka servisine ulaşılamadı."
+                print("GROQ HATASI:", repr(e))
+    return f"AI hatası: {str(e)}"
             )
 
         if response.status_code == 200:
