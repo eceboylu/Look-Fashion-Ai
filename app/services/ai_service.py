@@ -15,9 +15,10 @@ class AIServiceError(Exception):
 class AIService:
 
     def __init__(self):
+        # Ayarlar artık koda gömülü değil, config.py (ve .env) üzerinden geliyor.
         self.api_key = Config.GROQ_API_KEY
-        self.model = "llama-3.1-8b-instant"
-        self.url = "https://api.groq.com/openai/v1/chat/completions"
+        self.model = Config.GROQ_MODEL
+        self.url = Config.GROQ_API_URL
 
     def yanit_uret(self, mesaj, gecmis=None):
 
@@ -51,15 +52,24 @@ class AIService:
         payload = {
             "model": self.model,
             "messages": messages,
-            "temperature": 0.7
+            # Satış danışmanında düşük temperature: uydurma fiyat/özellik riskini azaltır.
+            "temperature": Config.AI_TEMPERATURE,
+            # Cevabın uzayıp reklam metnine dönmesini engeller.
+            "max_tokens": Config.AI_MAX_TOKENS
         }
+
+        # reasoning_effort sadece gpt-oss ailesinde geçerli.
+        # Boş bırakılırsa gönderilmez, böylece desteklemeyen modellerde
+        # istek hata vermez.
+        if Config.AI_REASONING_EFFORT:
+            payload["reasoning_effort"] = Config.AI_REASONING_EFFORT
 
         try:
             response = requests.post(
                 self.url,
                 json=payload,
                 headers=headers,
-                timeout=15
+                timeout=Config.AI_TIMEOUT
             )
 
         except requests.RequestException as e:

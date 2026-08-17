@@ -349,6 +349,22 @@ body{
 
 <script>
 
+/*
+    SOHBET HAFIZASI
+
+    Daha önce her istekte gecmis:[] gönderiliyordu, yani AI her mesajda
+    konuşmayı sıfırdan görüyordu. Satış akışı (önce anla > değer ver >
+    sonra forma yönlendir) ancak geçmiş gönderilirse çalışır.
+
+    Sunucu tarafı da bu listeyi ayrıca doğruluyor ve son 10 mesajla
+    sınırlıyor (routes.py > gecmisi_dogrula).
+*/
+
+let sohbetGecmisi = [];
+
+const GECMIS_LIMIT = 10;   // son 5 soru-cevap turu
+
+
 async function kombinIste(){
 
     const mesaj =
@@ -396,7 +412,9 @@ async function kombinIste(){
 
                 body:JSON.stringify({
                     mesaj:mesaj,
-                    gecmis:[]
+
+                    /* Önceki konuşma turları da gönderiliyor */
+                    gecmis:sohbetGecmisi
                 })
             }
         );
@@ -408,6 +426,40 @@ async function kombinIste(){
         if(d.basari){
 
             cevap.innerText = d.cevap;
+
+
+            /*
+                Başarılı turu hafızaya ekle.
+                Hata durumunda ekleme yapılmaz, yoksa cevapsız
+                bir soru geçmişte kalıp modeli yanıltır.
+            */
+
+            sohbetGecmisi.push({
+                role:'user',
+                content:mesaj
+            });
+
+            sohbetGecmisi.push({
+                role:'assistant',
+                content:d.cevap
+            });
+
+
+            /* Sadece son turları tut: istek boyutu ve token maliyeti için */
+
+            if(sohbetGecmisi.length > GECMIS_LIMIT){
+
+                sohbetGecmisi =
+                    sohbetGecmisi.slice(-GECMIS_LIMIT);
+
+            }
+
+
+            /* Soru gönderildi, kutuyu bir sonraki soru için temizle */
+
+            document
+                .getElementById('inputMesaj')
+                .value = '';
 
         }else{
 
@@ -432,6 +484,39 @@ async function kombinIste(){
             '✨ AI\'ya Sor';
 
     }
+
+}
+
+
+/*
+    Lead kaydedilirken müşterinin sohbette sorduğu son soruyu bulur.
+    Satış ekibi kişiyi aramadan önce neyle ilgilendiğini görür.
+
+    Kutuda yazı varsa onu, yoksa hafızadaki son kullanıcı mesajını alır
+    (soru gönderildikten sonra kutu temizleniyor).
+*/
+
+function sonKullaniciMesaji(){
+
+    const yazili =
+        document
+        .getElementById('inputMesaj')
+        .value
+        .trim();
+
+    if(yazili){
+        return yazili;
+    }
+
+    for(let i = sohbetGecmisi.length - 1; i >= 0; i--){
+
+        if(sohbetGecmisi[i].role === 'user'){
+            return sohbetGecmisi[i].content;
+        }
+
+    }
+
+    return '';
 
 }
 
@@ -484,11 +569,8 @@ async function leadKaydet(){
 
                     telefon:telefon,
 
-                    mesaj:
-                        document
-                        .getElementById('inputMesaj')
-                        .value
-                        .trim()
+                    /* Müşterinin sohbetteki son sorusu da kayda geçer */
+                    mesaj:sonKullaniciMesaji()
 
                 })
             }

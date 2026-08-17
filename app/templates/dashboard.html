@@ -214,12 +214,73 @@
 
 <script>
 
+/*
+    YÖNETİM ANAHTARI
+
+    /api/leads ucu artık ADMIN_API_KEY ile korunuyor (routes.py).
+    Anahtar HTML'e gömülmez; yöneticiden bir kez istenip tarayıcıda
+    saklanır ve her istekte 'X-Admin-Key' başlığıyla gönderilir.
+*/
+
+function adminAnahtari(){
+
+    let anahtar =
+        localStorage.getItem('adminKey');
+
+    if(!anahtar){
+
+        anahtar =
+            prompt('Yönetim paneli anahtarı (ADMIN_API_KEY):') || '';
+
+        if(anahtar){
+            localStorage.setItem('adminKey', anahtar);
+        }
+
+    }
+
+    return anahtar;
+
+}
+
+
+/* Anahtar yanlışsa kaydı sil ki bir sonraki denemede tekrar sorulsun */
+
+function anahtariUnut(){
+    localStorage.removeItem('adminKey');
+}
+
+
 async function getir(){
 
     try{
 
-        const r =
-            await fetch('/api/leads');
+        const r = await fetch(
+            '/api/leads',
+            {
+                headers:{
+                    'X-Admin-Key': adminAnahtari()
+                }
+            }
+        );
+
+
+        if(r.status === 401 || r.status === 503){
+
+            anahtariUnut();
+
+            document.getElementById('leadler').innerHTML = `
+                <tr>
+                    <td colspan="4" class="p-10 text-center text-red-500">
+                        Yetkisiz erişim. Sayfayı yenileyip doğru
+                        yönetim anahtarını gir.
+                    </td>
+                </tr>
+            `;
+
+            return;
+
+        }
+
 
         const d =
             await r.json();
