@@ -1,9 +1,10 @@
 import requests
 import logging
 
+#config dosyasını import ediyoruz.
 from config import Config
 
-
+# '__name__' bu dosyanın adını temsil eder, böylece hatanın hangi dosyadan geldiğini anlarız.
 logger = logging.getLogger(__name__)
 
 
@@ -79,6 +80,7 @@ class AIService:
             data = response.json()
 
             try:
+                # Gelen karmaşık JSON verisi içinden sadece yapay zekanın yazdığı metni çek
                 return data["choices"][0]["message"]["content"]
 
             except (KeyError, IndexError, TypeError):

@@ -19,7 +19,7 @@ def create_app(config_name='default'):
     # CORS: sadece config'de tanımlı origin'lere izin ver
     CORS(app, origins=app.config['CORS_ORIGINS'] or [])
 
-    # Veritabanını başlat (teardown_appcontext da burada kayıt ediliyor)
+    # Veritabanını başlat 
     init_db(app)
 
     from app.routes import main_bp, api_bp
@@ -28,6 +28,6 @@ def create_app(config_name='default'):
 
     @app.route('/health')
     def health():
-        return {"durum": "aktif", "proje": "AI Wardrobe"}, 200
+        return {"durum": "aktif", "proje": "Look Fashion AI"}, 200
 
     return app
