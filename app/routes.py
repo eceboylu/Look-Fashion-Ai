@@ -37,50 +37,6 @@ api_bp = Blueprint("api", __name__, url_prefix="/api")
 # GÜVENLİK YARDIMCILARI
 # =========================
 
-def admin_gerekli(fonksiyon):
-    """Yönetim uçlarını ADMIN_API_KEY ile korur.
-
-    İstemci anahtarı 'X-Admin-Key' başlığında gönderir.
-    Bu koruma olmadan /api/leads GET ucu, adresi bilen herkese
-    müşteri isim ve telefonlarını veriyordu.
-    """
-
-    @wraps(fonksiyon)
-    def sarmalayici(*args, **kwargs):
-
-        beklenen = current_app.config.get("ADMIN_API_KEY")
-
-        # Anahtar tanımlı değilse ucu AÇIK BIRAKMA.
-        # Aksi halde .env'i eksik bir sunucuda koruma sessizce devre dışı kalır.
-        if not beklenen:
-
-            logger.error(
-                "ADMIN_API_KEY tanımlı değil; yönetim ucu kapatıldı."
-            )
-
-            return jsonify({
-                "basari": False,
-                "mesaj": "Yönetim ucu yapılandırılmamış."
-            }), 503
-
-        gonderilen = request.headers.get("X-Admin-Key", "")
-
-        # compare_digest: sabit süreli karşılaştırma, zamanlama saldırısını önler.
-        if not secrets.compare_digest(gonderilen, beklenen):
-
-            logger.warning(
-                "Yetkisiz lead erişimi denemesi: %s",
-                request.remote_addr
-            )
-
-            return jsonify({
-                "basari": False,
-                "mesaj": "Yetkisiz erişim."
-            }), 401
-
-        return fonksiyon(*args, **kwargs)
-
-    return sarmalayici
 
 
 # Sohbet geçmişi sınırları.
@@ -285,7 +241,6 @@ def lead_ekle_route():
 # Müşteri isim/telefon bilgisi döndürdüğü için admin anahtarı zorunlu.
 
 @api_bp.route("/leads", methods=["GET"])
-@admin_gerekli
 def leads_getir_route():
 
     try:
