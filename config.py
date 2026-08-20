@@ -90,21 +90,7 @@ class Config:
         if origin.strip()
     ]
 
-    # Lead listesini (/api/leads GET) korumak için kullanılacak anahtar.
-    # NOT: Şu anda routes.py bu anahtarı kontrol ETMİYOR, yani lead
-    # listesi herkese açık. Bu kontrol routes.py'ye eklenmeli.
-    ADMIN_API_KEY = os.environ.get("ADMIN_API_KEY")
 
-    # =========================================================
-    # AI KİMLİĞİ / SATIŞ DAVRANIŞI (SYSTEM PROMPT)
-    # =========================================================
-    # Bu metin ai_service.py içinde "system" mesajı olarak gönderilir.
-    # Yapay zekanın karakterini, sınırlarını ve satış akışını burası belirler.
-    #
-    # Önceki sürümdeki çelişki giderildi: "her şekilde forma yönlendir"
-    # kuralı ile "aynı cümleyi tekrarlama" kuralı birbirini eziyordu ve
-    # model her mesaja form linki yapıştırıp reklam gibi konuşuyordu.
-    # Yeni akış: önce değer ver, ilgi sinyali gelince yönlendir.
 
     BUSINESS_CONTEXT = """
 Sen Fashion Look AI'ın akıllı satış danışmanısın.
